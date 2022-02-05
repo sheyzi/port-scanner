@@ -1,0 +1,58 @@
+{% include 'base.html' %}
+
+{% block content %}
+    <div class="container mt-2 mb-5">
+        <h3>Port scanner</h3>
+        <p>
+            Port Scanners are primarily used for Penetration Testing and Information Gathering.
+            Essentially, we are looking for open ports in a host for one of two reasons.
+            To ensure our servers are secure or to exploit those of someone else.
+            An unnecessarily opened port means vulnerability and comes with a lack of security.
+        </p>
+        <form
+            class="mb-3"
+            hx-get="{{ url_for('search') }}"
+            hx-target="#scan-result"
+            hx-swap="outerHTML"
+        >
+            <div class="mb-3">
+            <label class="form-label">Target URL</label>
+            <input type="text" name="target" class="form-control">
+          </div>
+          <div class="mb-3">
+          <label class="form-label">Scan Mode</label>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="mode" value="1" id="flexRadioDefault1" checked>
+              <label class="form-check-label" for="flexRadioDefault1">
+                Scan 1023 Standardized port
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="mode" value="2" id="flexRadioDefault2">
+              <label class="form-check-label" for="flexRadioDefault2">
+                Scan 48,128 reserved ports
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="mode" value="3">
+              <label class="form-check-label" for="flexRadioDefault2">
+                Scan only important ports
+              </label>
+            </div>
+             <div class="form-check">
+              <input class="form-check-input" type="radio" name="mode" value="4">
+              <label class="form-check-label" for="flexRadioDefault2">
+                Scan custom ports
+              </label>
+            </div>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Custom Ports</label>
+            <input type="text" name="custom_ports" class="form-control">
+              <div class="form-text">Separate ports with whitespace</div>
+          </div>
+          <button type="submit" class="btn btn-primary">Scan</button>
+        </form>
+        {% include 'snanner.html' %}
+    </div>
+{% endblock content %}
